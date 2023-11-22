@@ -3,8 +3,8 @@ from datetime import datetime
 import openai
 from aiogram import Bot, Dispatcher, types
 
-from config import TG_TOKEN, OPENAI_TOKEN
-from tables_db import Session, User, ConversationHistory
+from config.config import OPENAI_TOKEN, TG_TOKEN
+from src.tables_db import Session, User, ConversationHistory
 
 openai.api_key = OPENAI_TOKEN
 
