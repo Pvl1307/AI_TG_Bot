@@ -1,14 +1,16 @@
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, create_engine, Interval
-from sqlalchemy.orm import sessionmaker
 import sqlalchemy
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, create_engine
+from sqlalchemy.orm import sessionmaker
+
 from config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST
 
 Base = sqlalchemy.orm.declarative_base()
 
 
 class User(Base):
+    """Таблица пользователей"""
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
@@ -20,13 +22,14 @@ class User(Base):
 
 
 class ConversationHistory(Base):
+    """Таблица сообщений пользователей и ИИ"""
     __tablename__ = 'conversation_history'
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     user_message = Column(String)
     bot_reply = Column(String)
-    response_duration = Column(Interval)
+    response_duration = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
